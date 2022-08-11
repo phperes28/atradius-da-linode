@@ -1,0 +1,38 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<!-- check for errors -->
+{% if form.errors %}
+    <p>Your username or password was incorrect. Try again.</p>
+{% endif %}
+
+<!-- user is logged in but does not have access -->
+{% if next %}
+    {% if user.authenticated %}
+        <p>You don have permission</p>
+    {% else %}
+        <p>Please login to see</p>
+    {% endif %}
+{% endif %}
+
+
+<div class="container" data-aos="fade-up"> 
+
+    <div> 
+        <form class="login-form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.username.label_tag }}
+            {{ form.username }}
+
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            <input type="submit" value="Login">
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+
+</div>
+<!-- set up login form -->
+
+{% endblock %}
