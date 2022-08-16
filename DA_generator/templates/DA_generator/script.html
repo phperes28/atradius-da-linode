@@ -3,11 +3,13 @@
 {% block content %}
 
     {% csrf_token %}
-    <div class="container">
-        <h1>Script Model:</h1>
-        <p>  
-            {{ da_script|linebreaks }}
-        </p>
+    <div class="container script">
+        <div> 
+            <h1>Script Model:</h1>
+            <p>  
+                {{ da_script|linebreaks }}
+            </p>
+        </div>
         
     </div>
 
