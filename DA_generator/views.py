@@ -6,10 +6,12 @@ from .models import Book, Author, BookInstance, Genre, Language
 from django.views.generic import CreateView, DetailView, FormView
 from .forms import DAForm, BuyerForm, SelectForm
 from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
+@login_required
 def index(request):
     da_form = DAForm()
     buyer_form = BuyerForm()
