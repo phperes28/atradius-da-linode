@@ -1263,3 +1263,8 @@ body {
   .script {
     padding: 3%;
   }
+
+  .text{
+    top:50%;
+
+  }

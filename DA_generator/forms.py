@@ -15,6 +15,7 @@ class BuyerForm(ModelForm):
             "contact_name" : forms.TextInput(attrs={"class": "form-control"}),
             "contact_number" : forms.TextInput(attrs={"class": "form-control"}),
             "contact_email" : forms.TextInput(attrs={"class": "form-control"}),
+            
 
         }
 
@@ -27,6 +28,7 @@ class DAForm(ModelForm):
             "fins_required_1" : forms.TextInput(attrs={"class": "form-control"}),
             "fins_required_2" : forms.TextInput(attrs={"class": "form-control"}),
             "previous_contact" : forms.TextInput(attrs={"class": "form-control"}),
+            "sender" : forms.TextInput(attrs={"class": "form-control"}),
             
 
         }

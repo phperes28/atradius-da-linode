@@ -6,13 +6,27 @@
     <div class="container script">
         <div> 
             <h1>Script Model:</h1>
-            <p>  
+            <div id="da_script">  
                 {{ da_script|linebreaks }}
-            </p>
+            </div>
+            <p id="hello">hello</p>
         </div>
-        
+        <html>
+            <body>
+                <button class="btn btn-dark" onclick="CopyText()">Copy Text</button>
+                
+            </body>
+            </html>
     </div>
-
+    {% block scripts %}
+    <script>
+      function CopyText() {
+        var text = document.getElementById("da_script");
+        navigator.clipboard.writeText(text.innerText);
+        console.log(text.innerText)
+    }
+    </script>
+    {% endblock scripts %}
     
 
 {% endblock %}

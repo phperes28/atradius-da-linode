@@ -11,7 +11,7 @@ da_type = (
 
 
 
-def generate_first_contact(buyer_number, buyer_name, contact_name,  supplier, fins_1, fins_2, ):
+def generate_first_contact(buyer_number, buyer_name, contact_name,  supplier, fins_1, fins_2, sender ):
     #IF fins_2 == Nul - use another script
     return (f"""Atradius Information Request -  {buyer_name}// Atradius Ref. {buyer_number} \n
 
@@ -35,10 +35,10 @@ Should you have any queries or wish to further discuss the details, please do no
 
 Thank you, \n
 
-Pedro Peres""")
+{sender}""")
 
 
-def generate_annual_review_with_supplier(buyer_number, buyer_name, contact_name, fins_1, fins_2, previous_contact):
+def generate_annual_review_with_supplier(buyer_number, buyer_name, contact_name, fins_1, fins_2, previous_contact, sender):
 
     return(f"""Atradius Information Request -  {buyer_name}// Atradius Ref. {buyer_number}
     \n\nHi {contact_name}, 
@@ -66,7 +66,7 @@ def generate_annual_review_with_supplier(buyer_number, buyer_name, contact_name,
     
     Thank you, 
     
-    Pedro Peres""")
+    {sender}""")
 
 def generate_annual_review_no_supplier(buyer_number, buyer_name, contact_name, fins_1, fins_2, previous_contact):
 #make tkinter display following text

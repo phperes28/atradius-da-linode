@@ -33,7 +33,8 @@ def index(request):
             "supplier_name" : da_form["supplier_name"].value(),
             "fins_required_1" : da_form["fins_required_1"].value(),
             "fins_required_2" : da_form["fins_required_2"].value(),
-            "previous_contact" : da_form["previous_contact"].value()
+            "previous_contact" : da_form["previous_contact"].value(),
+            "sender" : da_form["sender"].value()
         }
 
     #     # if DA1 selected context == x, elif DA2 CONTEXT == y
@@ -45,14 +46,14 @@ def index(request):
             if da_type.cleaned_data["da_type"] == "First Contact":
                 # print(data_dir["da_type"]["First Contact"])
                 context_2 = {
-                    "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"], data_dir["fins_required_1"],data_dir["fins_required_2"])
+                    "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
                 }
                 return render(request, "DA_generator/script.html", context=context_2)
             
             elif  da_type.cleaned_data["da_type"] == "Annual Review w/ Supplier":
                 # print(data_dir["da_type"]["First Contact"])
                 context_2 = {
-                    "da_script" : generate_annual_review_with_supplier(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["previous_contact"])
+                    "da_script" : generate_annual_review_with_supplier(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["previous_contact"],data_dir["sender"])
                 }
                 return render(request, "DA_generator/script.html", context=context_2)
             

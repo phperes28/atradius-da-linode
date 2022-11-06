@@ -101,3 +101,4 @@ class DAInfo(models.Model):
    fins_required_1 = models.CharField(max_length=100, null=True, blank=True)
    fins_required_2 = models.CharField(max_length=100, null=True, blank=True)
    previous_contact = models.CharField(max_length=100, null=True, blank=True)
+   sender = models.CharField(max_length=100, null=True, blank=True)
