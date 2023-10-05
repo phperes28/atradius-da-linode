@@ -1,12 +1,16 @@
 
 
 da_type = (
-    ("First Contact", "First Contact"),
-    ("Annual Review w/ Supplier", "Annual Review w/ Supplier"),
-    ("Annual Review no Supplier", "Annual Review no Supplier"),
-    ("1 - Follow Up", "1 - Follow Up"),
-    ( "2 - Follow Up", "2 - Follow Up"),
-    ("3 - Follow Up","3 - Follow Up")
+    ("1 - NNP Info", "1 - NNP Info"),
+    ("2 - NNP WD", "2 - NNP WD"),
+    ("3 - Claims WD", "3 - Claims WD"),
+    ("4 - SR Request", "4 - SR Request"),
+    ("5 - DA First Contact", "5 -  DA First Contact"),
+    ("6 - DA Annual Review ", "6 -  DA Annual Review"),
+    ("7 - DA Annual Review no Supplier", "7 - DA Annual Review no Supplier"),
+    ("8 DA - Follow Up", "8 - DA Follow Up"),
+    ( "9 - DA Follow Up 2", "9 - DA Follow Up 2"),
+    ("10 - DA Follow Up 3","10 - DA Follow Up 3")
     )
 
 
@@ -85,3 +89,44 @@ def generate_annual_review_no_supplier(buyer_number, buyer_name, contact_name, f
     Thank you!!\n
     
     Kind Regards,""")
+
+
+def generate_NNP_info(buyer_number, buyer_name, contact_name, supplier):
+
+    return(f"""NNP -{buyer_name}// Atradius Ref. {buyer_number}\n
+    
+    Hello {contact_name}
+    
+    Hope you are well.\n
+
+    Can you please provide more information on NPP reported by {supplier} on {buyer_name} {buyer_number}?\n
+
+    Thank you""")
+
+
+# def generate_NNP_WD(buyer_number, buyer_name, contact_name, supplier):
+
+#     return(f"""NNP -{buyer_name}// Atradius Ref. {buyer_number}\n
+    
+#     Hello {contact_name}
+    
+#     Hope you are well.\n
+
+#     Can you please provide more information on NPP reported by {supplier} on {buyer_name} {buyer_number}?\n
+
+#     Thank you""")
+
+
+
+
+def generate_claims_WD(buyer_number, buyer_name, contact_name, supplier):
+    return(f"""NNP -{buyer_name}// Atradius Ref. {buyer_number}\n
+    
+    Hello {contact_name}
+    
+    Hope you are well.\n
+
+    NPP reported by {supplier} on {buyer_name} {buyer_number} is now with claims/collections\n
+    Can you please let the customer know we are withdrawing their limit effective immediately?
+
+    Thank you""")

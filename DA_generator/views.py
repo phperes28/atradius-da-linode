@@ -5,7 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from .models import Book, Author, BookInstance, Genre, Language
 from django.views.generic import CreateView, DetailView, FormView
 from .forms import DAForm, BuyerForm, SelectForm
-from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type
+from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD
 from django.contrib.auth.decorators import login_required
 
 
@@ -62,10 +62,36 @@ def index(request):
                     "da_script" : generate_annual_review_no_supplier(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["fins_required_1"],data_dir["fins_required_2"], data_dir["previous_contact"])
                 }
 
-
                 #if new buyer number save. probably query buyer number and if not .save()
                 buyer_form.save()
                 return render(request, "DA_generator/script.html", context=context_2)
+            
+            elif da_type.cleaned_data["da_type"] == "NNP Info":
+                context_2 = {
+                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                }
+                buyer_form.save()
+                return render(request,"DA_generator/script.html", context=context_2)
+            
+            elif da_type.cleaned_data["da_type"] == "1 - NNP Info":
+                context_2 = {
+                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                }
+                buyer_form.save()
+                return render(request,"DA_generator/script.html", context=context_2)
+
+            elif da_type.cleaned_data["da_type"] == "3 - Claims WD":
+                context_2 = {
+                    "da_script" : generate_claims_WD(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                }
+                buyer_form.save()
+                return render(request,"DA_generator/script.html", context=context_2)
+
+
+
+
+
+
             else:
                 print("nao foi")
    
