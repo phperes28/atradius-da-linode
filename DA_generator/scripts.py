@@ -10,7 +10,7 @@ da_type = (
     ("7 - DA Annual Review no Supplier", "7 - DA Annual Review no Supplier"),
     ("8 DA - Follow Up", "8 - DA Follow Up"),
     ( "9 - DA Follow Up 2", "9 - DA Follow Up 2"),
-    ("10 - DA Follow Up 3","10 - DA Follow Up 3")
+    ("10- DA Follow Up 3","10 - DA Follow Up 3")
     )
 
 

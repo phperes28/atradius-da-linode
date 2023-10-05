@@ -30,7 +30,7 @@ def index(request):
             "buyer_number" : buyer_form["buyer_number"].value(),
             "buyer_name" : buyer_form["buyer_name"].value(),
             "contact_name" : buyer_form["contact_name"].value(),
-            "supplier_name" : da_form["supplier_name"].value(),
+            "customer_name" : buyer_form["customer_name"].value(),
             "fins_required_1" : da_form["fins_required_1"].value(),
             "fins_required_2" : da_form["fins_required_2"].value(),
             "previous_contact" : da_form["previous_contact"].value(),
@@ -46,7 +46,7 @@ def index(request):
             if da_type.cleaned_data["da_type"] == "First Contact":
                 # print(data_dir["da_type"]["First Contact"])
                 context_2 = {
-                    "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
+                    "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
                 }
                 return render(request, "DA_generator/script.html", context=context_2)
             
@@ -68,21 +68,21 @@ def index(request):
             
             elif da_type.cleaned_data["da_type"] == "NNP Info":
                 context_2 = {
-                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
                 }
                 buyer_form.save()
                 return render(request,"DA_generator/script.html", context=context_2)
             
             elif da_type.cleaned_data["da_type"] == "1 - NNP Info":
                 context_2 = {
-                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
                 }
                 buyer_form.save()
                 return render(request,"DA_generator/script.html", context=context_2)
 
             elif da_type.cleaned_data["da_type"] == "3 - Claims WD":
                 context_2 = {
-                    "da_script" : generate_claims_WD(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["supplier_name"])
+                    "da_script" : generate_claims_WD(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
                 }
                 buyer_form.save()
                 return render(request,"DA_generator/script.html", context=context_2)
