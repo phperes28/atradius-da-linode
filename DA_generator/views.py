@@ -2,7 +2,6 @@
 from types import MethodType
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-from .models import Book, Author, BookInstance, Genre, Language
 from django.views.generic import CreateView, DetailView, FormView
 from .forms import DAForm, BuyerForm, SelectForm
 from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD
@@ -114,13 +113,13 @@ def index(request):
 
 
 
-class BookCreate(CreateView): #book_form.html
-    model = Book
-    fields = "__all__"
+# class BookCreate(CreateView): #book_form.html
+#     model = Book
+#     fields = "__all__"
 
 
-class BookDetail(DetailView): 
-    model = Book
+# class BookDetail(DetailView): 
+#     model = Book
 
 
 

@@ -130,3 +130,7 @@ def generate_claims_WD(buyer_number, buyer_name, contact_name, supplier):
     Can you please let the customer know we are withdrawing their limit effective immediately?
 
     Thank you""")
+
+
+def generate_SR_proposal(buyer_number, buyer_name):
+    pass
