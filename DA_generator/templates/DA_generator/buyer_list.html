@@ -1,0 +1,46 @@
+{% extends "header.html" %}
+
+{% block content %}
+<br>
+<div class="container">
+<h1>Buyers List</h1>
+</div>
+<br>
+
+<div class="container">
+
+{% for buyer in buyer_list %}
+
+<div class="card">
+    <div class="card-header">
+        <strong>{{ buyer.buyer_name }}</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <ul>
+            <li>Buyer Number: {{ buyer.buyer_number }}</li>
+            <li>A.C.N.: {{ buyer.business_number }}</li>
+            <li>Coutry: {{ buyer.buyer_country }}</li>
+            </ul>
+            <br>
+      </p>
+    
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+{% endfor %}
+
+</div>
+
+
+{% endblock %}   
+

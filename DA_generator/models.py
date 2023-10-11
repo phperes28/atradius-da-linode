@@ -14,10 +14,10 @@ import uuid
 
 class BuyerForm(models.Model):
     
-    buyer_number = models.IntegerField(null=True, blank=True)
+    buyer_number = models.IntegerField(null=True, blank=False)
     buyer_name = models.CharField(max_length=100, null=True, blank=True)
-    customer_name = models.CharField(max_length=100, null=True, blank=True)
-    # contact_name = models.CharField(max_length=50, null=True, blank=True)
+    
+    # 
     # contact_number = models.IntegerField(null=True, blank=True)
     # contact_email = models.EmailField(null=True, blank=True)
     
@@ -28,8 +28,10 @@ class BuyerForm(models.Model):
 
 class DAInfo(models.Model):
 #    buyer = models.ForeignKey("Buyer", on_delete=models.SET_NULL, null=True)
+   customer_name = models.CharField(max_length=100, null=True, blank=True)
    fins_required_1 = models.CharField(max_length=100, null=True, blank=True)
    fins_required_2 = models.CharField(max_length=100, null=True, blank=True)
+   contact_name = models.CharField(max_length=50, null=True, blank=True)
    previous_contact = models.CharField(max_length=100, null=True, blank=True)
    sender = models.CharField(max_length=100, null=True, blank=True)
 
@@ -41,7 +43,8 @@ class SRInfo(models.Model):
 
 class BuyerDB(models.Model):
      
-     buyer_number = models.IntegerField(null=True, blank=True)
+     
+     buyer_number = models.IntegerField(null=True, blank=False, unique=True)
      buyer_name = models.CharField(max_length=100, null=True, blank=True)
      business_number = models.IntegerField(null=True, blank=True)
      buyer_country = models.CharField(max_length=100, null=True, blank=True)

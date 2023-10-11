@@ -12,9 +12,9 @@ class BuyerForm(ModelForm):
         widgets = {
             "buyer_number" : forms.TextInput(attrs={"class": "form-control"}),
             "buyer_name" : forms.TextInput(attrs={"class": "form-control"}),
-            "contact_name" : forms.TextInput(attrs={"class": "form-control"}),
-            "contact_number" : forms.TextInput(attrs={"class": "form-control"}),
-            "contact_email" : forms.TextInput(attrs={"class": "form-control"}),
+            
+            # "contact_number" : forms.TextInput(attrs={"class": "form-control"}),
+            # "contact_email" : forms.TextInput(attrs={"class": "form-control"}),
             
         }
 
@@ -23,6 +23,7 @@ class DAForm(ModelForm):
     class Meta:
         model = DAInfo
         widgets = {
+            "contact_name" : forms.TextInput(attrs={"class": "form-control"}),
             "customer_name" : forms.TextInput(attrs={"class": "form-control"}),
             "fins_required_1" : forms.TextInput(attrs={"class": "form-control"}),
             "fins_required_2" : forms.TextInput(attrs={"class": "form-control"}),

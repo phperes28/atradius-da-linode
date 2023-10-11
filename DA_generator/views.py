@@ -6,7 +6,9 @@ from django.views.generic import CreateView, DetailView, FormView
 from .forms import DAForm, BuyerForm, SelectForm
 from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD
 from django.contrib.auth.decorators import login_required
-
+from .models import BuyerDB
+from django.contrib import messages
+from django.core.exceptions import *
 
 # Create your views here.
 
@@ -23,13 +25,16 @@ def index(request):
         da_form = DAForm(request.POST)
         buyer_form = BuyerForm(request.POST)
         
+        buyer = BuyerDB.objects.get(buyer_number= buyer_form["buyer_number"].value())
+        buyer_name = BuyerDB.objects.get(buyer_number= buyer_form["buyer_number"].value())
 
         data_dir = {
             "da_type" : da_type["da_type"],
-            "buyer_number" : buyer_form["buyer_number"].value(),
-            "buyer_name" : buyer_form["buyer_name"].value(),
-            "contact_name" : buyer_form["contact_name"].value(),
-            "customer_name" : buyer_form["customer_name"].value(),
+            "buyer_number" : buyer.buyer_number,
+            "buyer_number_1" : buyer_form["buyer_name"].value(),
+            "buyer_name" : buyer.buyer_name,                           
+            "contact_name" : da_form["contact_name"].value(),
+            "customer_name" : da_form["customer_name"].value(),
             "fins_required_1" : da_form["fins_required_1"].value(),
             "fins_required_2" : da_form["fins_required_2"].value(),
             "previous_contact" : da_form["previous_contact"].value(),
@@ -72,12 +77,7 @@ def index(request):
                 buyer_form.save()
                 return render(request,"DA_generator/script.html", context=context_2)
             
-            elif da_type.cleaned_data["da_type"] == "1 - NNP Info":
-                context_2 = {
-                    "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
-                }
-                buyer_form.save()
-                return render(request,"DA_generator/script.html", context=context_2)
+            
 
             elif da_type.cleaned_data["da_type"] == "3 - Claims WD":
                 context_2 = {
@@ -87,7 +87,22 @@ def index(request):
                 return render(request,"DA_generator/script.html", context=context_2)
 
 
+            elif da_type.cleaned_data["da_type"] == "1 - NNP Info":
+                try:
+                    context_2 = {
+                        "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
+                    }
+                    buyer_form.save()
+                    return render(request,"DA_generator/script.html", context=context_2)
+                
+                except BuyerDB.buyer_number.DoesNotExist or DoesNotExist:
+                    context_2 = {
+                        "da_script" : generate_NNP_info(data_dir["buyer_number_1"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
+                    }
+                    buyer_form.save()
+                    return render(request,"DA_generator/script.html", context=context_2)
 
+                   
 
 
 
@@ -130,3 +145,10 @@ def script_page(request):
 
 
 #create view for SCRIPT
+
+def all_buyers(request):
+    buyer_list = BuyerDB.objects.all()
+
+    return render(request, "DA_generator/buyer_list.html", 
+                  {"buyer_list" : buyer_list}
+                   )
