@@ -7,6 +7,7 @@ from .forms import DAForm, BuyerForm, SelectForm
 from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD
 from django.contrib.auth.decorators import login_required
 from .models import BuyerDB
+from django.db.models import Q
 from django.contrib import messages
 from django.core.exceptions import *
 
@@ -49,6 +50,7 @@ def index(request):
             #FIRST CONTACT
             if da_type.cleaned_data["da_type"] == "First Contact":
                 # print(data_dir["da_type"]["First Contact"])
+            
                 context_2 = {
                     "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
                 }
@@ -95,7 +97,7 @@ def index(request):
                     buyer_form.save()
                     return render(request,"DA_generator/script.html", context=context_2)
                 
-                except BuyerDB.buyer_number.DoesNotExist or DoesNotExist:
+                except BuyerDB.buyer_number.DoesNotExist or ObjectDoesNotExist:
                     context_2 = {
                         "da_script" : generate_NNP_info(data_dir["buyer_number_1"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
                     }
@@ -103,19 +105,13 @@ def index(request):
                     return render(request,"DA_generator/script.html", context=context_2)
 
                    
-
-
-
             else:
                 print("nao foi")
    
 
-    # # num_instances_avail = BookInstance.objects.filter(status__exact="a").count()
 
     context = {
-        # "num_books": num_books,
-        # "num_instances": num_instances,
-        # "num_instances_avail": num_instances_avail,
+
         "buyer_form": buyer_form,
         "da_form" : da_form,
         "da_type" : da_type,
@@ -128,16 +124,6 @@ def index(request):
 
 
 
-# class BookCreate(CreateView): #book_form.html
-#     model = Book
-#     fields = "__all__"
-
-
-# class BookDetail(DetailView): 
-#     model = Book
-
-
-
 def script_page(request):
     # use context items passed and use them as arguments in a function call
     
@@ -147,8 +133,18 @@ def script_page(request):
 #create view for SCRIPT
 
 def all_buyers(request):
-    buyer_list = BuyerDB.objects.all()
+    if request.method == "POST":
+        searched = request.POST['searched']
+        buyers = BuyerDB.objects.filter(Q(buyer_number__contains= searched) | Q(buyer_name__contains=searched) | Q(business_number__contains=searched))
 
-    return render(request, "DA_generator/buyer_list.html", 
-                  {"buyer_list" : buyer_list}
+        buyer_list = BuyerDB.objects.all()
+
+        return render(request, "DA_generator/buyer_list.html", 
+                    {"searched" : searched, "buyers" : buyers}
+                   )
+    else:
+        buyer_list = BuyerDB.objects.all()
+
+        return render(request, "DA_generator/buyer_list.html", 
+                    {"buyer_list" : buyer_list}
                    )

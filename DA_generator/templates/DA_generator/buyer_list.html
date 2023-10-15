@@ -8,6 +8,29 @@
 <br>
 
 <div class="container">
+{% if searched %}
+
+{% for buyer in buyers %}
+    <div class="card">
+        <div class="card-header">
+            <strong>{{ buyer.buyer_name }}</strong>
+        </div>
+        <div class="card-body">
+        <p class="card-text">
+            <ul>
+                <li>Buyer Number: {{ buyer.buyer_number }}</li>
+                <li>Business Number: {{ buyer.business_number }}</li>
+                <li>Country: {{ buyer.buyer_country }}</li>
+                </ul>
+                <br>
+        </p>
+        
+        </div>
+    </div>
+
+{% endfor %}
+
+{% else %}
 
 {% for buyer in buyer_list %}
 
@@ -19,8 +42,8 @@
       <p class="card-text">
         <ul>
             <li>Buyer Number: {{ buyer.buyer_number }}</li>
-            <li>A.C.N.: {{ buyer.business_number }}</li>
-            <li>Coutry: {{ buyer.buyer_country }}</li>
+            <li>Business Number: : {{ buyer.business_number }}</li>
+            <li>Country: {{ buyer.buyer_country }}</li>
             </ul>
             <br>
       </p>
@@ -29,17 +52,14 @@
   </div>
 
 
-
-
-
-
-
-
-
-
 {% endfor %}
 
 </div>
+
+{% endif %}
+
+
+
 
 
 {% endblock %}   

@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,11 +65,21 @@
           <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="/#about">About</a></li>
           <li><a class="nav-link scrollto" href="/#services">Script Generator</a></li>
-          <li><a class="nav-link scrollto " href="/#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="/#team">Team</a></li>
+          <!-- <li><a class="nav-link scrollto " href="/#portfolio">Portfolio</a></li> -->
+          <!-- <li><a class="nav-link scrollto" href="/#team">Team</a></li> -->
           <li><a class="nav-link scrollto" href="/#contact">Contact</a></li>
           <li><a class="nav-link scrollto" href="{% url 'buyer-list' %}">Buyer List</a></li>
           <li><a class="nav-link scrollto" href="/accounts/login">Log-in</a></li>
+          <li>
+
+              <form class="d-flex" method="POST" action="{% url 'buyer-list' %}">
+
+                {% csrf_token %}
+
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Buyer" aria-label="Search" name="searched">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+        </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
