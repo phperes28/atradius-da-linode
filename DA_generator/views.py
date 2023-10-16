@@ -46,24 +46,24 @@ def index(request):
         if da_form.is_valid() and buyer_form.is_valid() and da_type.is_valid():
             print(da_type.cleaned_data["da_type"])
            
-           
             #FIRST CONTACT
-            if da_type.cleaned_data["da_type"] == "First Contact":
+            if da_type.cleaned_data["da_type"] == "5 - DA First Contact":
                 # print(data_dir["da_type"]["First Contact"])
             
                 context_2 = {
                     "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
                 }
+                buyer_form.save()
                 return render(request, "DA_generator/script.html", context=context_2)
             
-            elif  da_type.cleaned_data["da_type"] == "Annual Review w/ Supplier":
+            elif  da_type.cleaned_data["da_type"] == "6 - DA Annual Review":
                 # print(data_dir["da_type"]["First Contact"])
                 context_2 = {
                     "da_script" : generate_annual_review_with_supplier(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["previous_contact"],data_dir["sender"])
                 }
                 return render(request, "DA_generator/script.html", context=context_2)
             
-            elif  da_type.cleaned_data["da_type"] == "Annual Review no Supplier":
+            elif  da_type.cleaned_data["da_type"] == "7 - DA Annual Review no Supplier":
                 context_2 = {
                     "da_script" : generate_annual_review_no_supplier(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["fins_required_1"],data_dir["fins_required_2"], data_dir["previous_contact"])
                 }
@@ -72,7 +72,7 @@ def index(request):
                 buyer_form.save()
                 return render(request, "DA_generator/script.html", context=context_2)
             
-            elif da_type.cleaned_data["da_type"] == "NNP Info":
+            elif da_type.cleaned_data["da_type"] == "2 - NNP WD":
                 context_2 = {
                     "da_script" : generate_NNP_info(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"])
                 }

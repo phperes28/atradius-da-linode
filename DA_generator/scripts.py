@@ -5,12 +5,12 @@ da_type = (
     ("2 - NNP WD", "2 - NNP WD"),
     ("3 - Claims WD", "3 - Claims WD"),
     ("4 - SR Request", "4 - SR Request"),
-    ("5 - DA First Contact", "5 -  DA First Contact"),
-    ("6 - DA Annual Review ", "6 -  DA Annual Review"),
+    ("5 - DA First Contact", "5 - DA First Contact"),
+    ("6 - DA Annual Review", "6 - DA Annual Review"),
     ("7 - DA Annual Review no Supplier", "7 - DA Annual Review no Supplier"),
-    ("8 DA - Follow Up", "8 - DA Follow Up"),
-    ( "9 - DA Follow Up 2", "9 - DA Follow Up 2"),
-    ("10- DA Follow Up 3","10 - DA Follow Up 3")
+    # ("8 DA - Follow Up", "8 - DA Follow Up"),
+    # ( "9 - DA Follow Up 2", "9 - DA Follow Up 2"),
+    # ("10- DA Follow Up 3","10 - DA Follow Up 3")
     )
 
 
@@ -95,7 +95,7 @@ def generate_NNP_info(buyer_number, buyer_name, contact_name, supplier):
 
     return(f"""NNP -{buyer_name}// Atradius Ref. {buyer_number}\n
     
-    Hello {contact_name}
+    Hello {contact_name},
     
     Hope you are well.\n
 
