@@ -10,8 +10,6 @@ from .scripts import da_type
 import uuid
 
 
-
-
 class BuyerForm(models.Model):
     
     buyer_number = models.IntegerField(null=True, blank=False)
@@ -42,7 +40,6 @@ class SRInfo(models.Model):
 
 
 class BuyerDB(models.Model):
-     
      
      buyer_number = models.IntegerField(null=True, blank=False, unique=True)
      buyer_name = models.CharField(max_length=100, null=True, blank=True)
