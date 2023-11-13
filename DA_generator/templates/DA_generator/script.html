@@ -6,7 +6,9 @@
     <div class="container script">
         <div> 
             <h1>Script Text:</h1>
-            <div id="da_script">  
+            <div id="da_header">{{ da_header }}</div>
+            <div id="da_script" data-originalText="{{da_script}}">  
+                
                 {{ da_script|linebreaks }}
             </div>
             
@@ -16,6 +18,10 @@
                 <button class="btn btn-dark" onclick="CopyText()">Copy Text</button>
                 
             </body>
+            <body>
+                <button class="btn btn-dark" onclick="WriteEmail()">Send Email</button>
+                
+            </body>
             </html>
     </div>
     {% block scripts %}
@@ -23,10 +29,26 @@
       function CopyText() {
         var text = document.getElementById("da_script");
         navigator.clipboard.writeText(text.innerText);
-        console.log(text.innerText)
+        console.log(text.innerText);
     }
+
+    function WriteEmail() {
+        const header = document.getElementById("da_header").innerText;
+        let body = document.getElementById("da_script").getAttribute('data-originaltext');
+        body = body.replaceAll("\n", '%0A');
+        const url = `mailto:?subject=${header}&body=${body}`;
+        console.log("url.length", url.length)
+        window.location.href = url;
+        // window.location.href = `mailto:?subject="Test"&body="cu"`;
+        //return 'location.href=;
+    }
+
     </script>
+    
     {% endblock scripts %}
     
 
 {% endblock %}
+
+
+<!-- location.href='mailto:?subject=header&body=da_script' -->

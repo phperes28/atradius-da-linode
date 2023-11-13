@@ -14,10 +14,17 @@ da_type = (
     )
 
 
+# DO NOT USE "%" IN TEXT!
+# CHECK URL SIZE, NO MORE 2048 CHARACTERS
+
+def generate_header(buyer_number, buyer_name):
+    return (f"Atradius Information Request -  {buyer_name}// Atradius Ref. {buyer_number}")
+
+
 
 def generate_first_contact(buyer_number, buyer_name, contact_name,  supplier, fins_1, fins_2, sender ):
     #IF fins_2 == Nul - use another script
-    return (f"""Atradius Information Request -  {buyer_name}// Atradius Ref. {buyer_number} \n
+    return (f""" 
 
 Hi {contact_name}, 
 
@@ -32,7 +39,7 @@ All information supplied to us is treated on a confidential basis and is for int
 I am happy to provide a confidentiality agreement, please advise if this is required.\n
 About Atradius:\n
 Atradius, one of the world's leading credit insurance and credit management companies, protects more than EUR400 billion of the world trade annually against the risks of non-payment.
-Head-quartered in Amsterdam, the group has a presence in more than 50 countries on five continents, employing around 3,700 people with and annual turnover of EUR1.8 billion,\n giving us a 24% per cent global market share. 
+Head-quartered in Amsterdam, the group has a presence in more than 50 countries on five continents, employing around 3,700 people with and annual turnover of EUR1.8 billion,\n giving us a 24 per cent global market share. 
 Our company which has a wealth of knowledge on trade sectors, countries and business trends, makes more than 20,000 credit decisions daily.\n
 
 Should you have any queries or wish to further discuss the details, please do not hesitate to contact me.\n

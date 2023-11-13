@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from django.views.generic import CreateView, DetailView, FormView
 from .forms import DAForm, BuyerForm, SelectForm
-from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD
+from .scripts import generate_first_contact, generate_annual_review_with_supplier, generate_annual_review_no_supplier, da_type, generate_NNP_info,generate_claims_WD, generate_header
 from django.contrib.auth.decorators import login_required
 from .models import BuyerDB
 from django.db.models import Q
@@ -49,8 +49,9 @@ def index(request):
             #FIRST CONTACT
             if da_type.cleaned_data["da_type"] == "5 - DA First Contact":
                 # print(data_dir["da_type"]["First Contact"])
-            
+                
                 context_2 = {
+                    "da_header" : generate_header(data_dir["buyer_number"], data_dir["buyer_name"]),
                     "da_script" : generate_first_contact(data_dir["buyer_number"], data_dir["buyer_name"], data_dir["contact_name"], data_dir["customer_name"], data_dir["fins_required_1"],data_dir["fins_required_2"],data_dir["sender"])
                 }
                 buyer_form.save()
