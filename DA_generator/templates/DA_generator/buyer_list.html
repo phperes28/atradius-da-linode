@@ -24,8 +24,11 @@
             </ul>
             <br>
             <a href="https://illiondirect.com.au/Integate/Search.mvc?upid=6383369150462386171456524848&search={{ buyer.business_number }}&initialCountry=AUS&method=Commercial%20Search" target="_blank">
-              <button type="button" class="btn btn-dark" >Illion</button>
+              <button type="button" class="btn btn-dark" action="/order_DB">Illion - TESTING</button>
           </a>
+          <a href= "" target="_blank">
+            <button type="button" class="btn btn-dark" >Illion - D&B Report</button>
+        </a>
             {% if  buyer.buyer_country  == "Australia" %}
           
             <a href="https://connectonline.asic.gov.au/RegistrySearch/faces/landing/panelSearch.jspx?searchTab=search&searchText={{ buyer.business_number }}&searchType=OrgAndBusNm&_adf.ctrl-state=1584jxrxz_70" target="_blank">
@@ -61,8 +64,11 @@
             </ul>
             <br>
             <a href="https://illiondirect.com.au/Integate/Search.mvc?upid=6383369150462386171456524848&search={{ buyer.business_number }}&initialCountry=AUS&method=Commercial%20Search" target="_blank">
-              <button type="button" class="btn btn-dark" >Illion</button>
+              <button type="button" class="btn btn-dark" >Illion - Late Payment Report</button>
           </a>
+          <a href="https://illiondirect.com.au/Integate/Search.mvc?upid=6383369150462386171456524848&search={{ buyer.business_number }}&initialCountry=AUS&method=Commercial%20Search" target="_blank">
+            <button type="button" class="btn btn-dark" >Illion - D&B Report</button>
+        </a>
           {% if  buyer.buyer_country  == "Australia" %}
           
             <a href="https://connectonline.asic.gov.au/RegistrySearch/faces/landing/panelSearch.jspx?searchTab=search&searchText={{ buyer.business_number }}&searchType=OrgAndBusNm&_adf.ctrl-state=1584jxrxz_70" target="_blank">

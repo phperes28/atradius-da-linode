@@ -10,6 +10,9 @@ from .models import BuyerDB
 from django.db.models import Q
 from django.contrib import messages
 from django.core.exceptions import *
+from django.http import HttpResponse
+import time
+from illion_scraper import IllionScraper
 
 # Create your views here.
 
@@ -104,13 +107,8 @@ def index(request):
                     }
                     buyer_form.save()
                     return render(request,"DA_generator/script.html", context=context_2)
-
-                   
             else:
                 print("nao foi")
-   
-
-
     context = {
 
         "buyer_form": buyer_form,
@@ -122,9 +120,6 @@ def index(request):
 
     return render(request, "DA_generator/index.html", context=context)
 
-
-
-
 def script_page(request):
     # use context items passed and use them as arguments in a function call
     
@@ -132,6 +127,46 @@ def script_page(request):
 
 
 #create view for SCRIPT
+
+def order_DB(request,buyer_acn,buyer_country):
+        bot = IllionScraper()
+        bot.log_in()
+        time.sleep(2)
+        bot.select_country(buyer_country)
+        bot.search_buyer(buyer_acn)   
+        if bot.confirm_acn(buyer):  #CHECKS IF REALLY ACN NUMBER OR DOCUMENT NUMBER WITH SAME VALUE AS ACN
+            bot.click_buyer(buyer)
+            bot.write_buyer_name(buyer)
+            bot.click_DB_REPORT() 
+            bot.input_report_data(buyer)
+            if bot.check_for_investigation():
+                bot.investigation_order()
+            else:
+                pass
+            bot.buy_report(buyer)                         #TURNS BUYING FUNCTION ON/OFF
+            if bot.check_for_investigation_buttom():
+                time.sleep(5)
+                bot.click_investigation_buttom()        
+            else:
+                pass
+            time.sleep(5)
+            
+        else:
+            bot.click_second_buyer(buyer)
+            bot.click_DB_REPORT() 
+            bot.input_report_data(buyer)
+            if bot.check_for_investigation():
+                bot.investigation_order()
+            else:
+                pass
+            bot.buy_report(buyer)                         #TURNS BUYING FUNCTION ON/OFF
+            if bot.check_for_investigation_buttom():
+                time.sleep(5)
+                bot.click_investigation_buttom()        
+            else:
+                pass
+                time.sleep(5)
+            
 
 def all_buyers(request):
     if request.method == "POST":
@@ -149,3 +184,10 @@ def all_buyers(request):
         return render(request, "DA_generator/buyer_list.html", 
                     {"buyer_list" : buyer_list}
                    )
+    
+    
+    def simple(request):
+        print("testing")
+        return HttpResponse(""" """)
+    
+    
