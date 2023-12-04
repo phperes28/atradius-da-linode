@@ -128,88 +128,15 @@ class IllionScraper:
             self.write_buyer_not_found(buyer)
             print("second buyer non existant")
 
-#-----------------------------------------CHECKING FOR FINANCIALS---------------------------------------#
-    def click_company_financials(self):
-        try:
-            financials_buttom = self.driver.find_element_by_xpath(COMPANY_FINANCIALS_BUTTOM)
-            financials_buttom.click()
-        except NoSuchElementException or StaleElementReferenceException:
-            # self.write_no_fins_available(buyer)
-            print(" no financials buttom")
-            self.write_no_fins_available()
 
 
-    def click_2022_fins(self):
-        try:
-            fins = self.driver.find_element_by_xpath(FINS_2022)
-            fins.click()
-        except ElementClickInterceptedException:
-            time.sleep(3)
-            fins = self.driver.find_element_by_xpath(FINS_2022)
-            fins.click()
 
 
-        except NoSuchElementException or StaleElementReferenceException:
-            # self.write_no_fins_available(buyer)
-            print(" no fins field")
 
-    def click_2023_fins(self):
-        try:
-            fins = self.driver.find_element_by_xpath(FINS_2023)
-            fins.click()
+    
 
-        except NoSuchElementException or StaleElementReferenceException:
-            # self.write_no_fins_available(buyer)
-            print(" no fins field")
-
-    def check_availability_2022(self):
-        try:
-            element = self.driver.find_element_by_xpath(FINS_TEXT)
-            text = element.text
-            print(text)
-            if text == FINS_MESSAGE_AVAILABLE:
-                print("Fins available")
-                self.write_fins_available("2022")
-                return True
-            elif text == FINS_MESSAGE_UNAVAILABLE or FINS_MESSAGE_UNAVAILABLE_2:
-                result = "unavailable"
-                print(f'2022 {result}')
-                self.write_not_available("2022")
-                return result
-            elif text == FINS_ALREADY_PURCHASED or FINS_ALREADY_PURCHASED_2:
-                result = "purchased"
-                self.write_purchased("2022")
-                print(f'2022 {result}')
-                return result
-            else:
-                print("Unexpected Xpath element ")
-        except NoSuchElementException or StaleElementReferenceException:
-            print("2022 - no fins text field")
-
-    def check_availability_2023(self):
-        try:
-            element = self.driver.find_element_by_xpath(FINS_TEXT)
-            text = element.text
-            print(text)
-            if text == FINS_MESSAGE_AVAILABLE:
-                self.write_fins_available("2023")
-                return True
-            elif text == FINS_ALREADY_PURCHASED or FINS_ALREADY_PURCHASED_2:
-                result = "purchased"
-                print(result)
-                self.write_purchased("2023")
-                return result
-            elif text == FINS_MESSAGE_UNAVAILABLE or FINS_MESSAGE_UNAVAILABLE_2:
-                result = "unavailable"
-                self.write_not_available("2023")
-                print(result)
-                return result
-            else:
-                print("Unexpected Xpath element ")
-        except NoSuchElementException or StaleElementReferenceException:
-            print("2023 - no fins text field")
             
-# can then write function to click on second date element and check for another fins.
+
 
 #----------------------------------------Ordering Reports-------------------------------------------------
 
